@@ -1,1 +1,1 @@
-# eswcontest 코끼리 팀 소스
+# eswcontest 코끼리팀 소스코드

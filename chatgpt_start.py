@@ -10,14 +10,14 @@ from dotenv import load_dotenv
 from twilio.rest import Client
 
 
-TWILIO_ACCOUNT_SID = 'ACd33723c1554fd8b8595cc0b79bb77723'         # Twilio API를 이용하기 위한 키값들 초기화
-TWILIO_AUTH_TOKEN = '2d8272a798d65610d19fc6f76e9147be'
+TWILIO_ACCOUNT_SID = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'         # Twilio API를 이용하기 위한 키값들 초기화
+TWILIO_AUTH_TOKEN = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
 
 def ment_rec():             # 카카오i클라우드 'Text to Speech API'의 음성합성 기능을 이용해서 스피커 시작 멘트를 만듬
     voice = """ curl -v \
-              -H "x-api-key: 91ce013c97b577b8f4c8d354e675b883" \
+              -H "x-api-key: xxxxxxxxxxxxxxxxxxxxxxxxxxx" \
               -H "Content-Type: application/xml" \
               -H "X-TTS-Engine: deep" \
               -d '<speak>
@@ -29,8 +29,8 @@ def ment_rec():             # 카카오i클라우드 'Text to Speech API'의 음
 
 def mayday_112():                          # Twilio API를 이용해서 112에 문자 메시지 신고
     client.messages.create(
-        to="+821025084448",
-        from_="+17313185668",
+        to="+xxxxxxxxxxx",
+        from_="+xxxxxxxxxxx",
         body="[시각장애인 112 긴급신고] 주소: XX도 XX시 XX로12번길 34, 시각장애인 긴급구조 요청입니다. 살려주세요."
     )
     os.system("mpg123 ./sound/success.mp3")
@@ -40,8 +40,8 @@ def mayday_112():                          # Twilio API를 이용해서 112에 �
 
 def mayday_119():                          # Twilio API를 이용해서 112에 문자 메시지 신고
     client.messages.create(
-        to="+821025084448",
-        from_="+17313185668",
+        to="+xxxxxxxxxxx",
+        from_="+xxxxxxxxxxx",
         body="[시각장애인 119 화재신고] 주소: XX도 XX시 XX로12번길 34, 시각장애인 화재구조 요청입니다. 살려주세요."
     )
     os.system("mpg123 ./sound/success.mp3")
@@ -139,7 +139,7 @@ def chat_gpt_speak():
         print(answer)
 
         voice = """ curl -v \
-                      -H "x-api-key: 91ce013c97b577b8f4c8d354e675b883" \
+                      -H "x-api-key: xxxxxxxxxxxxxxxxxxxxxxxx" \
                       -H "Content-Type: application/xml" \
                       -H "X-TTS-Engine: deep" \
                       -d '<speak>

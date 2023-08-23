@@ -107,7 +107,7 @@ def voice_rec():
 
 def chat_gpt_speak():
     load_dotenv()
-    openai.organization = "org-oMb8n1ArLu6XkrsXxXNg9hQQ"                    # OpenAI API를 사용하기 위한 키값들 초기화
+    openai.organization = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"                    # OpenAI API를 사용하기 위한 키값들 초기화
     openai.api_key = os.getenv("OPENAI_API_KEY")                            # .env 파일에 작성한 API 키 가져오기
     openai.Model.list()
 

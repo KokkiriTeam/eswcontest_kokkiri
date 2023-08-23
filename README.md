@@ -1,1 +1,1 @@
-# eswcontest_kokkiri
+# eswcontest 코끼리 팀 소스

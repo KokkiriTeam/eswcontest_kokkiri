@@ -38,7 +38,7 @@ def mayday_112():                          # Twilio API를 이용해서 112에 �
     return
 
 
-def mayday_119():                          # Twilio API를 이용해서 112에 문자 메시지 신고
+def mayday_119():                          # Twilio API를 이용해서 119에 문자 메시지 신고
     client.messages.create(
         to="+xxxxxxxxxxx",
         from_="+xxxxxxxxxxx",

@@ -11,14 +11,14 @@ import sms
 from dotenv import load_dotenv
 
 
-def mayday_112():                          # Twilio API를 이용해서 112에 문자 메시지 신고
+def mayday_112():                          # 네이버 클라우드 SMS API를 이용해서 112에 문자 메시지 신고
     sms.send_sms_112(112)
     os.system("mpg123 ./sound/success.mp3")
     print('112 신고')
     return
 
 
-def mayday_119():                          # Twilio API를 이용해서 119에 문자 메시지 신고
+def mayday_119():                          # 네이버 클라우드 SMS API를 이용해서 119에 문자 메시지 신고
     sms.send_sms_119(119)
     os.system("mpg123 ./sound/success.mp3")
     print('119 신고')

@@ -2,7 +2,7 @@
   "type": "service_account",
   "project_id": "eswcontest-kokkiri",
   "private_key_id": "XXXXXXXXXXXXXXXXXXXXXXXX",
-  "private_key": "-----BEGIN PRIVATE KEY-----\XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXY=\n-----END PRIVATE KEY-----\n",
+  "private_key": "-----BEGIN PRIVATE KEY-----XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXY=\n-----END PRIVATE KEY-----\n",
   "client_email": "kokkiri-tts@eswcontest-kokkiri.iam.gserviceaccount.com",
   "client_id": "XXXXXXXXXXXXXXXXXXXXXXXX",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",

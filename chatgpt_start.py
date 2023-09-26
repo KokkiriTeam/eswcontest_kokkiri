@@ -6,44 +6,20 @@ import time
 import pyaudio
 import wave
 import audioop
+import gcp_tts
+import sms
 from dotenv import load_dotenv
-from twilio.rest import Client
-
-
-TWILIO_ACCOUNT_SID = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'         # Twilio API를 이용하기 위한 키값들 초기화
-TWILIO_AUTH_TOKEN = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-
-
-def ment_rec():             # 카카오i클라우드 'Text to Speech API'의 음성합성 기능을 이용해서 스피커 시작 멘트를 만듬
-    voice = """ curl -v \
-              -H "x-api-key: xxxxxxxxxxxxxxxxxxxxxxxxxxx" \
-              -H "Content-Type: application/xml" \
-              -H "X-TTS-Engine: deep" \
-              -d '<speak>
-                  <voice name="Summer">제21회 임베디드 소프트웨어 경진대회에 참가한 코끼리팀의 작품인 시각장애인을 위한 챗지피티 스피커입니다.</voice>
-                  </speak>' \
-              https://94a32363-bfe6-4c43-8cd5-0ecb45a376e6.api.kr-central-1.kakaoi.io/ai/text-to-speech/d7504f19ae0e4390b7c790dc2e2d4226 > ./sound/start.mp3 && mpg123 ./sound/start.mp3 """
-    os.system(voice)
 
 
 def mayday_112():                          # Twilio API를 이용해서 112에 문자 메시지 신고
-    client.messages.create(
-        to="+xxxxxxxxxxx",
-        from_="+xxxxxxxxxxx",
-        body="[시각장애인 112 긴급신고] 주소: XX도 XX시 XX로12번길 34, 시각장애인 긴급구조 요청입니다. 살려주세요."
-    )
+    sms.send_sms_112(112)
     os.system("mpg123 ./sound/success.mp3")
     print('112 신고')
     return
 
 
 def mayday_119():                          # Twilio API를 이용해서 119에 문자 메시지 신고
-    client.messages.create(
-        to="+xxxxxxxxxxx",
-        from_="+xxxxxxxxxxx",
-        body="[시각장애인 119 화재신고] 주소: XX도 XX시 XX로12번길 34, 시각장애인 화재구조 요청입니다. 살려주세요."
-    )
+    sms.send_sms_119(119)
     os.system("mpg123 ./sound/success.mp3")
     print('119 신고')
     return
@@ -61,7 +37,7 @@ def voice_rec():
     RATE = 44100                                      # 전송률
     CHUNK = 640                                       # 전송 단위 크기
     RECORD_SECONDS = 7                                # 녹음 시간
-    WAVE_OUTPUT_FILENAME = "sound/question.wav"       # 녹음 생성 오디오 파일
+    WAVE_OUTPUT_FILENAME = "./sound/question.wav"       # 녹음 생성 오디오 파일
 
     audio = pyaudio.PyAudio()
 
@@ -107,7 +83,7 @@ def voice_rec():
 
 def chat_gpt_speak():
     load_dotenv()
-    openai.organization = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"                    # OpenAI API를 사용하기 위한 키값들 초기화
+    openai.organization = "org-oMb8n1ArLu6XkrsXxXNg9hQQ"                    # OpenAI API를 사용하기 위한 키값들 초기화
     openai.api_key = os.getenv("OPENAI_API_KEY")                            # .env 파일에 작성한 API 키 가져오기
     openai.Model.list()
 
@@ -138,24 +114,15 @@ def chat_gpt_speak():
         answer = response.choices[0]["message"]["content"].strip()         # 문자열로 응답을 받음
         print(answer)
 
-        voice = """ curl -v \
-                      -H "x-api-key: xxxxxxxxxxxxxxxxxxxxxxxx" \
-                      -H "Content-Type: application/xml" \
-                      -H "X-TTS-Engine: deep" \
-                      -d '<speak>
-                          <voice name="Nora">{0}</voice>
-                          </speak>' \
-                      https://94a32363-bfe6-4c43-8cd5-0ecb45a376e6.api.kr-central-1.kakaoi.io/ai/text-to-speech/d7504f19ae0e4390b7c790dc2e2d4226 > ./sound/answer.mp3 && mpg123 ./sound/answer.mp3 """.format(answer)
-        os.system(voice)   # 응답받은 문자열을 음성파일(answer.mp3)로 바꾸기 위해서 카카오i클라우드 'Text to Speech API'의 음성합성 기능을 이용해서 'answer.mp3' 로 변환해서 수신한 후, 음성 재생함
+        gcp_tts.synthesize_text(answer)
 
         conversation.append({"role": "assistant", "content": response['choices'][0]['message']['content']})  # ChatGPT가 답변 후 재질문 받는 기능을 위한 코드
 
 
 if __name__ == "__main__":
-    # ment_rec()                                 # 멘트 만든 후 주석 처리
     os.system("mpg123 ./sound/start.mp3")        # 스피커 시작 멘트
     time.sleep(2)
-    conversation = [{"role": "system", "content": "You are a helpful assistant."}]      # ChatGPT system 초기화
+    conversation = [{"role": "system", "content": "You are a helpful assistant."}]      # ChatGPT System 초기화
     while True:
         voice_rec()   # 질문 음성 녹음
         chat_gpt_speak()  # ChatGPT 답변

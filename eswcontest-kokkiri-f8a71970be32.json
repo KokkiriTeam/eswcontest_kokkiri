@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "eswcontest-kokkiri",
+  "private_key_id": "XXXXXXXXXXXXXXXXXXXXXXXX",
+  "private_key": "-----BEGIN PRIVATE KEY-----\XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "kokkiri-tts@eswcontest-kokkiri.iam.gserviceaccount.com",
+  "client_id": "XXXXXXXXXXXXXXXXXXXXXXXX",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kokkiri-tts%40eswcontest-kokkiri.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
